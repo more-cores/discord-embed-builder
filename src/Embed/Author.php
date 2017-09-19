@@ -76,7 +76,7 @@ class Author extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'name' => $this->name()
+            'name' => $this->name(),
         ];
 
         if ($this->url != null) {

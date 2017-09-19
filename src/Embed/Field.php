@@ -12,7 +12,7 @@ class Field extends Jsonable
     /** @var string */
     protected $value;
 
-    /** @var boolean */
+    /** @var bool */
     protected $inline = false;
 
     public function __construct(string $name = null, string $value = null, bool $inline = null)
@@ -63,7 +63,7 @@ class Field extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'name' => $this->name()
+            'name' => $this->name(),
         ];
 
         if ($this->value != null) {

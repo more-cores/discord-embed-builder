@@ -57,7 +57,7 @@ class FieldTest extends TestCase
     public function canProvideInline()
     {
         $this->assertFalse($this->field->isInline());
-        
+
         $this->field->inline();
 
         $this->assertTrue($this->field->isInline());

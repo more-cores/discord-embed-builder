@@ -212,7 +212,7 @@ class Message extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'type' => $this->type()
+            'type' => $this->type(),
         ];
 
         if ($this->title != null) {

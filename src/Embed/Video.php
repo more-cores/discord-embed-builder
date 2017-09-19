@@ -63,7 +63,7 @@ class Video extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'url' => $this->url()
+            'url' => $this->url(),
         ];
 
         if ($this->height != null) {
