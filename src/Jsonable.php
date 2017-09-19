@@ -1,6 +1,6 @@
 <?php
 
-namespace DiscordEmbedBuilder;
+namespace DiscordMessageBuilder;
 
 abstract class Jsonable implements \JsonSerializable
 {

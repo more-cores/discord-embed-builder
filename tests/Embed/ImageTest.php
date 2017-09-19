@@ -1,8 +1,8 @@
 <?php
 
-namespace DiscordEmbedBuilder;
+namespace DiscordMessageBuilder;
 
-use DiscordEmbedBuilder\Embed\Image;
+use DiscordMessageBuilder\Embed\Image;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace DiscordEmbedBuilder;
+namespace DiscordMessageBuilder;
 
-use DiscordEmbedBuilder\Embed\Video;
+use DiscordMessageBuilder\Embed\Video;
 use PHPUnit\Framework\TestCase;
 
 class VideoTest extends TestCase

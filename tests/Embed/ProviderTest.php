@@ -1,8 +1,8 @@
 <?php
 
-namespace DiscordEmbedBuilder;
+namespace DiscordMessageBuilder;
 
-use DiscordEmbedBuilder\Embed\Provider;
+use DiscordMessageBuilder\Embed\Provider;
 use PHPUnit\Framework\TestCase;
 
 class ProviderTest extends TestCase

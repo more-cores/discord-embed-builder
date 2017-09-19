@@ -1,8 +1,8 @@
 <?php
 
-namespace DiscordEmbedBuilder\Embed;
+namespace DiscordMessageBuilder\Embed;
 
-use DiscordEmbedBuilder\Jsonable;
+use DiscordMessageBuilder\Jsonable;
 
 class Image extends Jsonable
 {

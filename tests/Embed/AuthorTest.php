@@ -1,8 +1,8 @@
 <?php
 
-namespace DiscordEmbedBuilder;
+namespace DiscordMessageBuilder;
 
-use DiscordEmbedBuilder\Embed\Author;
+use DiscordMessageBuilder\Embed\Author;
 use PHPUnit\Framework\TestCase;
 
 class AuthorTest extends TestCase
