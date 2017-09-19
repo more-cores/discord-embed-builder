@@ -76,7 +76,7 @@ class Image extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'url' => $this->url()
+            'url' => $this->url(),
         ];
 
         if ($this->proxyUrl != null) {
