@@ -59,7 +59,7 @@ class Footer extends Jsonable
     public function jsonSerialize()
     {
         $jsonData = [
-            'text' => $this->text()
+            'text' => $this->text(),
         ];
 
         if ($this->iconUrl != null) {

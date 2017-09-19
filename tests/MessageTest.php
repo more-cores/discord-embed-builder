@@ -2,12 +2,12 @@
 
 namespace DiscordEmbedBuilder;
 
+use DateTime;
 use DiscordEmbedBuilder\Embed\Author;
 use DiscordEmbedBuilder\Embed\Field;
 use DiscordEmbedBuilder\Embed\Footer;
 use DiscordEmbedBuilder\Embed\Image;
 use DiscordEmbedBuilder\Embed\Provider;
-use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class MessageTest extends TestCase
@@ -37,7 +37,7 @@ class MessageTest extends TestCase
     public function canProvideType()
     {
         $this->assertEquals('rich', $this->message->type());
-        
+
         $this->message->setType($type = uniqid());
 
         $this->assertEquals($type, $this->message->type());
@@ -161,7 +161,6 @@ class MessageTest extends TestCase
     /** @test */
     public function canSetFieldByNameValueAndInline()
     {
-
         $fieldName = uniqid();
         $value = uniqid();
         $inline = true;
