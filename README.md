@@ -1,11 +1,11 @@
 # Discord Message Builder [![Latest Stable Version](https://poser.pugx.org/more-cores/discord-message-builder/v/stable.png)](https://packagist.org/packages/more-cores/discord-message-builder) [![Total Downloads](https://poser.pugx.org/more-cores/discord-message-builder/downloads.png)](https://packagist.org/packages/more-cores/discord-message-builder) [![Coverage Status](https://coveralls.io/repos/github/more-cores/discord-message-builder/badge.svg)](https://coveralls.io/github/more-cores/discord-message-builder)
 
-A small library to building Discord embed messages.
+A small library to building Discord messages.
 
 # Installation
 
 ```
-composer require more-cores/discord-embed-builder ~1.0
+composer require more-cores/discord-message-builder ~1.0
 ```
 
 # Usage
