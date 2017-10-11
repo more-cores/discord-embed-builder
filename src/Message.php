@@ -217,13 +217,13 @@ class Message extends Jsonable
 
         if ($this->thumbnailUrl != null) {
             $embed['thumbnail'] = [
-                'url' => $this->thumbnailUrl
+                'url' => $this->thumbnailUrl,
             ];
         }
 
         if ($this->imageUrl != null) {
             $embed['image'] = [
-                'url' => $this->imageUrl
+                'url' => $this->imageUrl,
             ];
         }
 
