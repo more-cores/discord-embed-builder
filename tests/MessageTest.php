@@ -116,29 +116,6 @@ class MessageTest extends TestCase
     }
 
     /** @test */
-    public function canSetProviderObject()
-    {
-        $provider = new Provider($name = uniqid());
-        $this->message->setProvider($provider);
-
-        $this->assertEquals($provider, $this->message->provider());
-
-        $this->assertArrayHasKey('provider', $this->message->jsonSerialize());
-        $this->assertEquals($name, $this->message->jsonSerialize()['provider']['name']);
-    }
-
-    /** @test */
-    public function canSetProviderByUrlAndDimensions()
-    {
-        $name = uniqid();
-        $url = uniqid();
-        $this->message->setProvider($name, $url);
-
-        $this->assertEquals($name, $this->message->provider()->name());
-        $this->assertEquals($url, $this->message->provider()->url());
-    }
-
-    /** @test */
     public function canAddMultipleFields()
     {
         $this->assertCount(0, $this->message->fields());
