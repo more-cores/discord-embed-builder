@@ -13,6 +13,7 @@ composer require more-cores/discord-message-builder:^1.0
 
 ```php
 $message = new Message();
+$message->setContent($content);
 $message->setTitle($title);
 $message->setDescription($description);
 $message->setUrl($url);
@@ -66,23 +67,6 @@ $field = new Field();
 $field->setName($name);
 $field->setValue($value);
 $message->setVideo($field);
-```
-
-## Video
-
-```php
-// define an embed video using shorthand
-$message->setVideo($url);
-
-// and optionally specify specific attributes
-$message->setVideo($url, $width, $height);
-
-// define an embed video by object
-$video = new Video();
-$video->setUrl($url);
-$video->setWidth($width);
-$video->setHeight($height);
-$message->setVideo($video);
 ```
 
 ## Image

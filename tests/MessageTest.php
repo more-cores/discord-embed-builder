@@ -20,6 +20,18 @@ class MessageTest extends TestCase
         parent::setUp();
 
         $this->message = new Message();
+        $this->message->setContent('');
+    }
+
+    /** @test */
+    public function canProvideContent()
+    {
+        $this->message->setContent($content = uniqid());
+
+        $this->assertEquals($content, $this->message->content());
+
+        $this->assertArrayHasKey('content', $this->message->jsonSerialize());
+        $this->assertEquals($content, $this->message->jsonSerialize()['content']);
     }
 
     /** @test */
@@ -29,21 +41,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($title, $this->message->title());
 
-        $this->assertArrayHasKey('title', $this->message->jsonSerialize());
-        $this->assertEquals($title, $this->message->jsonSerialize()['title']);
-    }
-
-    /** @test */
-    public function canProvideType()
-    {
-        $this->assertEquals('rich', $this->message->type());
-        
-        $this->message->setType($type = uniqid());
-
-        $this->assertEquals($type, $this->message->type());
-
-        $this->assertArrayHasKey('type', $this->message->jsonSerialize());
-        $this->assertEquals($type, $this->message->jsonSerialize()['type']);
+        $this->assertArrayHasKey('title', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($title, $this->message->jsonSerialize()['embed']['title']);
     }
 
     /** @test */
@@ -53,8 +52,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($url, $this->message->url());
 
-        $this->assertArrayHasKey('url', $this->message->jsonSerialize());
-        $this->assertEquals($url, $this->message->jsonSerialize()['url']);
+        $this->assertArrayHasKey('url', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($url, $this->message->jsonSerialize()['embed']['url']);
     }
 
     /** @test */
@@ -64,8 +63,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($timestamp, $this->message->timestamp());
 
-        $this->assertArrayHasKey('timestamp', $this->message->jsonSerialize());
-        $this->assertEquals($timestamp->format(DateTime::ATOM), $this->message->jsonSerialize()['timestamp']);
+        $this->assertArrayHasKey('timestamp', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($timestamp->format(DateTime::ATOM), $this->message->jsonSerialize()['embed']['timestamp']);
     }
 
     /** @test */
@@ -75,8 +74,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($description, $this->message->description());
 
-        $this->assertArrayHasKey('description', $this->message->jsonSerialize());
-        $this->assertEquals($description, $this->message->jsonSerialize()['description']);
+        $this->assertArrayHasKey('description', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($description, $this->message->jsonSerialize()['embed']['description']);
     }
 
     /** @test */
@@ -86,8 +85,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($color, $this->message->color());
 
-        $this->assertArrayHasKey('color', $this->message->jsonSerialize());
-        $this->assertEquals($color, $this->message->jsonSerialize()['color']);
+        $this->assertArrayHasKey('color', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($color, $this->message->jsonSerialize()['embed']['color']);
     }
 
     /** @test */
@@ -98,8 +97,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($author, $this->message->author());
 
-        $this->assertArrayHasKey('author', $this->message->jsonSerialize());
-        $this->assertEquals($name, $this->message->jsonSerialize()['author']['name']);
+        $this->assertArrayHasKey('author', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($name, $this->message->jsonSerialize()['embed']['author']['name']);
     }
 
     /** @test */
@@ -123,8 +122,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($provider, $this->message->provider());
 
-        $this->assertArrayHasKey('provider', $this->message->jsonSerialize());
-        $this->assertEquals($name, $this->message->jsonSerialize()['provider']['name']);
+        $this->assertArrayHasKey('provider', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($name, $this->message->jsonSerialize()['embed']['provider']['name']);
     }
 
     /** @test */
@@ -153,9 +152,9 @@ class MessageTest extends TestCase
 
         $this->assertCount(2, $this->message->fields());
 
-        $this->assertArrayHasKey('fields', $this->message->jsonSerialize());
-        $this->assertEquals($firstName, $this->message->jsonSerialize()['fields'][0]['name']);
-        $this->assertEquals($secondName, $this->message->jsonSerialize()['fields'][1]['name']);
+        $this->assertArrayHasKey('fields', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($firstName, $this->message->jsonSerialize()['embed']['fields'][0]['name']);
+        $this->assertEquals($secondName, $this->message->jsonSerialize()['embed']['fields'][1]['name']);
     }
 
     /** @test */
@@ -180,8 +179,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($thumbnail, $this->message->thumbnail());
 
-        $this->assertArrayHasKey('thumbnail', $this->message->jsonSerialize());
-        $this->assertEquals($name, $this->message->jsonSerialize()['thumbnail']['url']);
+        $this->assertArrayHasKey('thumbnail', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($name, $this->message->jsonSerialize()['embed']['thumbnail']['url']);
     }
 
     /** @test */
@@ -205,8 +204,8 @@ class MessageTest extends TestCase
 
         $this->assertEquals($footer, $this->message->footer());
 
-        $this->assertArrayHasKey('footer', $this->message->jsonSerialize());
-        $this->assertEquals($text, $this->message->jsonSerialize()['footer']['text']);
+        $this->assertArrayHasKey('footer', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($text, $this->message->jsonSerialize()['embed']['footer']['text']);
     }
 
     /** @test */
