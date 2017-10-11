@@ -7,15 +7,14 @@ use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Field;
 use DiscordMessageBuilder\Embed\Footer;
 use DiscordMessageBuilder\Embed\Image;
-use DiscordMessageBuilder\Embed\Video;
 
 class Message extends Jsonable
 {
     /** @var string */
-    private $title;
+    private $content = '';
 
     /** @var string */
-    private $type = 'rich';
+    private $title;
 
     /** @var string */
     private $description;
@@ -34,9 +33,6 @@ class Message extends Jsonable
 
     /** @var Field[] */
     private $fields = [];
-
-    /** @var Video */
-    private $video;
 
     /** @var Image */
     private $thumbnail;
@@ -57,14 +53,14 @@ class Message extends Jsonable
         return $this->title;
     }
 
-    public function setType(string $type)
+    public function setContent(string $content)
     {
-        $this->type = $type;
+        $this->content = $content;
     }
 
-    public function type() : string
+    public function content() : string
     {
-        return $this->type;
+        return $this->content;
     }
 
     public function setDescription(string $description)
@@ -135,20 +131,6 @@ class Message extends Jsonable
         return $this->fields;
     }
 
-    public function setVideo($video, int $width = null, int $height = null)
-    {
-        if ($video instanceof Video) {
-            $this->video = $video;
-        } else {
-            $this->video = new Video($video, $width, $height);
-        }
-    }
-
-    public function video() : Video
-    {
-        return $this->video;
-    }
-
     public function setImage($image, int $width = null, int $height = null)
     {
         if ($image instanceof Image) {
@@ -193,56 +175,58 @@ class Message extends Jsonable
 
     public function jsonSerialize()
     {
-        $jsonData = [
-            'type' => $this->type(),
-        ];
+        $embed = [];
 
         if ($this->title != null) {
-            $jsonData['title'] = $this->title;
+            $embed['title'] = $this->title;
         }
 
         if ($this->url != null) {
-            $jsonData['url'] = $this->url;
+            $embed['url'] = $this->url;
         }
 
         if ($this->description != null) {
-            $jsonData['description'] = $this->description;
+            $embed['description'] = $this->description;
         }
 
         if ($this->timestamp != null) {
-            $jsonData['timestamp'] = $this->timestamp->format(DateTime::ATOM);
+            $embed['timestamp'] = $this->timestamp->format(DateTime::ATOM);
         }
 
         if ($this->color != null) {
-            $jsonData['color'] = $this->color;
+            $embed['color'] = $this->color;
         }
 
         if ($this->author != null) {
-            $jsonData['author'] = $this->author()->jsonSerialize();
-        }
-
-        if ($this->video != null) {
-            $jsonData['video'] = $this->video()->jsonSerialize();
+            $embed['author'] = $this->author()->jsonSerialize();
         }
 
         if ($this->thumbnail != null) {
-            $jsonData['thumbnail'] = $this->thumbnail()->jsonSerialize();
+            $embed['thumbnail'] = $this->thumbnail()->jsonSerialize();
         }
 
         if ($this->image != null) {
-            $jsonData['image'] = $this->image()->jsonSerialize();
+            $embed['image'] = $this->image()->jsonSerialize();
         }
 
         if (count($this->fields) > 0) {
-            $jsonData['fields'] = [];
+            $embed['fields'] = [];
 
             foreach ($this->fields as $field) {
-                $jsonData['fields'][] = $field->jsonSerialize();
+                $embed['fields'][] = $field->jsonSerialize();
             }
         }
 
         if ($this->footer != null) {
-            $jsonData['footer'] = $this->footer()->jsonSerialize();
+            $embed['footer'] = $this->footer()->jsonSerialize();
+        }
+
+        $jsonData = [
+            'content' => $this->content(),
+        ];
+
+        if (count($embed) > 0) {
+            $jsonData['embed'] = $embed;
         }
 
         return $jsonData;
