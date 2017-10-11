@@ -21,22 +21,6 @@ $message->setColor($color);
 $message->toJson(); // valid json ready to be sent to Discord
 ```
 
-## Provider
-
-```php
-// define an embed provider using shorthand
-$message->setProvider($name);
-
-// and optionally specify specific attributes
-$message->setProvider($name, $url);
-
-// define an embed provider by object
-$provider = new Provider();
-$provider->setName($name);
-$provider->setUrl($url);
-$message->setProvider($provider);
-```
-
 ## Author
 
 ```php

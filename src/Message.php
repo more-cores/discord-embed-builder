@@ -30,9 +30,6 @@ class Message extends Jsonable
     /** @var string */
     private $color;
 
-    /** @var Provider */
-    private $provider;
-
     /** @var Author */
     private $author;
 
@@ -109,20 +106,6 @@ class Message extends Jsonable
     public function color() : string
     {
         return $this->color;
-    }
-
-    public function setProvider($provider, string $url = null)
-    {
-        if ($provider instanceof Provider) {
-            $this->provider = $provider;
-        } else {
-            $this->provider = new Provider($provider, $url);
-        }
-    }
-
-    public function provider() : Provider
-    {
-        return $this->provider;
     }
 
     public function setAuthor($author, string $url = null, string $iconUrl = null)
@@ -237,10 +220,6 @@ class Message extends Jsonable
 
         if ($this->author != null) {
             $jsonData['author'] = $this->author()->jsonSerialize();
-        }
-
-        if ($this->provider != null) {
-            $jsonData['provider'] = $this->provider()->jsonSerialize();
         }
 
         if ($this->video != null) {
