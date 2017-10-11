@@ -7,7 +7,6 @@ use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Field;
 use DiscordMessageBuilder\Embed\Footer;
 use DiscordMessageBuilder\Embed\Image;
-use DiscordMessageBuilder\Embed\Provider;
 use DiscordMessageBuilder\Embed\Video;
 
 class Message extends Jsonable
