@@ -112,7 +112,7 @@ class MessageTest extends TestCase
         $this->assertEquals($url, $this->message->author()->url());
         $this->assertEquals($iconUrl, $this->message->author()->iconUrl());
     }
-  
+
     /** @test */
     public function canAddMultipleFields()
     {
