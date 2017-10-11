@@ -11,7 +11,6 @@ use DiscordMessageBuilder\Embed\Provider;
 
 class Message extends Jsonable
 {
-
     /** @var string */
     private $content = '';
 
@@ -245,7 +244,7 @@ class Message extends Jsonable
         }
 
         $jsonData = [
-            'content' => $this->content()
+            'content' => $this->content(),
         ];
 
         if (count($embed) > 0) {

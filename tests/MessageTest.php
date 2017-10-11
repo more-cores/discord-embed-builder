@@ -160,7 +160,6 @@ class MessageTest extends TestCase
     /** @test */
     public function canSetFieldByNameValueAndInline()
     {
-
         $fieldName = uniqid();
         $value = uniqid();
         $inline = true;
