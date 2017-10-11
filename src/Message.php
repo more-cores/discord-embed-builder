@@ -7,7 +7,6 @@ use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Field;
 use DiscordMessageBuilder\Embed\Footer;
 use DiscordMessageBuilder\Embed\Image;
-use DiscordMessageBuilder\Embed\Provider;
 
 class Message extends Jsonable
 {
@@ -29,19 +28,16 @@ class Message extends Jsonable
     /** @var string */
     private $color;
 
-    /** @var Provider */
-    private $provider;
-
     /** @var Author */
     private $author;
 
     /** @var Field[] */
     private $fields = [];
 
-    /** @var Image */
+    /** @var string */
     private $thumbnailUrl;
 
-    /** @var Image */
+    /** @var string */
     private $imageUrl;
 
     /** @var Footer */
@@ -105,20 +101,6 @@ class Message extends Jsonable
     public function color() : string
     {
         return $this->color;
-    }
-
-    public function setProvider($provider, string $url = null)
-    {
-        if ($provider instanceof Provider) {
-            $this->provider = $provider;
-        } else {
-            $this->provider = new Provider($provider, $url);
-        }
-    }
-
-    public function provider() : Provider
-    {
-        return $this->provider;
     }
 
     public function setAuthor($author, string $url = null, string $iconUrl = null)
@@ -209,10 +191,6 @@ class Message extends Jsonable
 
         if ($this->author != null) {
             $embed['author'] = $this->author()->jsonSerialize();
-        }
-
-        if ($this->provider != null) {
-            $embed['provider'] = $this->provider()->jsonSerialize();
         }
 
         if ($this->thumbnailUrl != null) {

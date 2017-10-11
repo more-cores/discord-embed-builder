@@ -6,7 +6,6 @@ use DateTime;
 use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Field;
 use DiscordMessageBuilder\Embed\Footer;
-use DiscordMessageBuilder\Embed\Provider;
 use PHPUnit\Framework\TestCase;
 
 class MessageTest extends TestCase
@@ -111,29 +110,6 @@ class MessageTest extends TestCase
         $this->assertEquals($name, $this->message->author()->name());
         $this->assertEquals($url, $this->message->author()->url());
         $this->assertEquals($iconUrl, $this->message->author()->iconUrl());
-    }
-
-    /** @test */
-    public function canSetProviderObject()
-    {
-        $provider = new Provider($name = uniqid());
-        $this->message->setProvider($provider);
-
-        $this->assertEquals($provider, $this->message->provider());
-
-        $this->assertArrayHasKey('provider', $this->message->jsonSerialize()['embed']);
-        $this->assertEquals($name, $this->message->jsonSerialize()['embed']['provider']['name']);
-    }
-
-    /** @test */
-    public function canSetProviderByUrlAndDimensions()
-    {
-        $name = uniqid();
-        $url = uniqid();
-        $this->message->setProvider($name, $url);
-
-        $this->assertEquals($name, $this->message->provider()->name());
-        $this->assertEquals($url, $this->message->provider()->url());
     }
 
     /** @test */
