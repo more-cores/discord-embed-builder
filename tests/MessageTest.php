@@ -6,7 +6,6 @@ use DateTime;
 use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Field;
 use DiscordMessageBuilder\Embed\Footer;
-use DiscordMessageBuilder\Embed\Image;
 use DiscordMessageBuilder\Embed\Provider;
 use PHPUnit\Framework\TestCase;
 
@@ -171,28 +170,25 @@ class MessageTest extends TestCase
     }
 
     /** @test */
-    public function canSetThumbnailObject()
+    public function canSetImageUrl()
     {
-        $thumbnail = new Image($name = uniqid());
-        $this->message->setThumbnail($thumbnail);
+        $this->message->setImageUrl($imageUrl = uniqid());
 
-        $this->assertEquals($thumbnail, $this->message->thumbnail());
+        $this->assertEquals($imageUrl, $this->message->imageUrl());
 
-        $this->assertArrayHasKey('thumbnail', $this->message->jsonSerialize()['embed']);
-        $this->assertEquals($name, $this->message->jsonSerialize()['embed']['thumbnail']['url']);
+        $this->assertArrayHasKey('image', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($imageUrl, $this->message->jsonSerialize()['embed']['image']['url']);
     }
 
     /** @test */
-    public function canSetThumbnailByUrlAndDimensions()
+    public function canSetThumbnailUrl()
     {
-        $thumbnailUrl = uniqid();
-        $width = rand(1, 4000);
-        $height = rand(4001, 8000);
-        $this->message->setThumbnail($thumbnailUrl, $width, $height);
+        $this->message->setThumbnailUrl($imageUrl = uniqid());
 
-        $this->assertEquals($thumbnailUrl, $this->message->thumbnail()->url());
-        $this->assertEquals($width, $this->message->thumbnail()->width());
-        $this->assertEquals($height, $this->message->thumbnail()->height());
+        $this->assertEquals($imageUrl, $this->message->thumbnailUrl());
+
+        $this->assertArrayHasKey('thumbnail', $this->message->jsonSerialize()['embed']);
+        $this->assertEquals($imageUrl, $this->message->jsonSerialize()['embed']['thumbnail']['url']);
     }
 
     /** @test */
