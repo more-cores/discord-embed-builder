@@ -5,7 +5,7 @@ A small library to building Discord messages.
 # Installation
 
 ```
-composer require more-cores/discord-message-builder:^1.0
+composer require more-cores/discord-message-builder:^2.0
 ```
 
 # Usage
