@@ -34,11 +34,11 @@ class Message extends Jsonable
     /** @var Field[] */
     private $fields = [];
 
-    /** @var Image */
-    private $thumbnail;
+    /** @var string */
+    private $thumbnailUrl;
 
-    /** @var Image */
-    private $image;
+    /** @var string */
+    private $imageUrl;
 
     /** @var Footer */
     private $footer;
@@ -131,32 +131,24 @@ class Message extends Jsonable
         return $this->fields;
     }
 
-    public function setImage($image, int $width = null, int $height = null)
+    public function setImageUrl(string $imageUrl)
     {
-        if ($image instanceof Image) {
-            $this->image = $image;
-        } else {
-            $this->image = new Image($image, $width, $height);
-        }
+        $this->imageUrl = $imageUrl;
     }
 
-    public function image() : Image
+    public function imageUrl() : string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 
-    public function setThumbnail($thumbnail, int $width = null, int $height = null)
+    public function setThumbnailUrl(string $thumbnailUrl)
     {
-        if ($thumbnail instanceof Image) {
-            $this->thumbnail = $thumbnail;
-        } else {
-            $this->thumbnail = new Image($thumbnail, $width, $height);
-        }
+        $this->thumbnailUrl = $thumbnailUrl;
     }
 
-    public function thumbnail() : Image
+    public function thumbnailUrl() : string
     {
-        return $this->thumbnail;
+        return $this->thumbnailUrl;
     }
 
     public function setFooter($text, string $iconUrl = null)
@@ -201,12 +193,16 @@ class Message extends Jsonable
             $embed['author'] = $this->author()->jsonSerialize();
         }
 
-        if ($this->thumbnail != null) {
-            $embed['thumbnail'] = $this->thumbnail()->jsonSerialize();
+        if ($this->thumbnailUrl != null) {
+            $embed['thumbnail'] = [
+                'url' => $this->thumbnailUrl,
+            ];
         }
 
-        if ($this->image != null) {
-            $embed['image'] = $this->image()->jsonSerialize();
+        if ($this->imageUrl != null) {
+            $embed['image'] = [
+                'url' => $this->imageUrl,
+            ];
         }
 
         if (count($this->fields) > 0) {

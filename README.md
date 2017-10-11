@@ -56,35 +56,13 @@ $message->setVideo($field);
 ## Image
 
 ```php
-// define an embed image using shorthand
-$message->setImage($image);
-
-// and optionally specify  specific attributes
-$message->setImage($urlToImage, $width, $height);
-
-// define an embed image by object
-$image = new Image();
-$image->setUrl($urlToImage);
-$image->setWidth($width);
-$image->setHeight($height);
-$message->setImage($image);
+$message->setImageUrl($imageUrl);
 ```
 
 ## Thumbnail
 
 ```php
-// define an embed thumbnail using shorthand
-$message->setThumbnail($thumbnail);
-
-// and optionally specify  specific attributes
-$message->setThumbnail($urlToImage, $width, $height);
-
-// define an embed thumbnail by object
-$thumbnail = new Thumbnail();
-$thumbnail->setUrl($urlToImage);
-$thumbnail->setWidth($width);
-$thumbnail->setHeight($height);
-$message->setThumbnail($thumbnail);
+$message->setThumbnailUrl($thumbnailUrl);
 ```
 
 ## Footer
