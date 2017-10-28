@@ -99,7 +99,7 @@ class Message extends Jsonable
     }
 
     /**
-     * Set the 24-bit RGB value of a color
+     * Set the 24-bit RGB value of a color.
      */
     public function setColor(int $color)
     {
