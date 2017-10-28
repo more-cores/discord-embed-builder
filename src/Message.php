@@ -93,7 +93,15 @@ class Message extends Jsonable
         return $this->timestamp;
     }
 
-    public function setColor(string $color)
+    public function setColorRGB(int $red, int $green, int $blue)
+    {
+        $this->color = ($red << 16) + ($green << 8) + $blue;
+    }
+
+    /**
+     * Set the 24-bit RGB value of a color
+     */
+    public function setColor(int $color)
     {
         $this->color = $color;
     }

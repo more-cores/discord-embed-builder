@@ -79,12 +79,20 @@ class MessageTest extends TestCase
     /** @test */
     public function canProvideColor()
     {
-        $this->message->setColor($color = uniqid());
+        $this->message->setColor($color = time());
 
         $this->assertEquals($color, $this->message->color());
 
         $this->assertArrayHasKey('color', $this->message->jsonSerialize()['embed']);
         $this->assertEquals($color, $this->message->jsonSerialize()['embed']['color']);
+    }
+
+    /** @test */
+    public function canSetColorBasedOnRGB()
+    {
+        $this->message->setColorRGB(62, 143, 64);
+
+        $this->assertEquals(4099904, $this->message->color());
     }
 
     /** @test */
