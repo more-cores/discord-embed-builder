@@ -11,37 +11,37 @@ use DiscordMessageBuilder\Embed\Image;
 class Message extends Jsonable
 {
     /** @var string */
-    private $content = '';
+    protected $content = '';
 
     /** @var string */
-    private $title;
+    protected $title;
 
     /** @var string */
-    private $description;
+    protected $description;
 
     /** @var string */
-    private $url;
+    protected $url;
 
     /** @var DateTime */
-    private $timestamp;
+    protected $timestamp;
 
     /** @var string */
-    private $color;
+    protected $color;
 
     /** @var Author */
-    private $author;
+    protected $author;
 
     /** @var Field[] */
-    private $fields = [];
+    protected $fields = [];
 
     /** @var string */
-    private $thumbnailUrl;
+    protected $thumbnailUrl;
 
     /** @var string */
-    private $imageUrl;
+    protected $imageUrl;
 
     /** @var Footer */
-    private $footer;
+    protected $footer;
 
     public function setTitle(string $title)
     {
