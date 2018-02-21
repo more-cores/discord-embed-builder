@@ -15,14 +15,18 @@ class Footer extends Jsonable
     /** @var string */
     protected $proxyIconUrl;
 
-    public function __construct(string $text = null, string $iconUrl = null)
+    public function __construct(array $attributes = null)
     {
-        if ($text != null) {
-            $this->setText($text);
+        if (isset($attributes['text'])) {
+            $this->setText($attributes['text']);
         }
 
-        if ($iconUrl != null) {
-            $this->setIconUrl($iconUrl);
+        if (isset($attributes['icon_url'])) {
+            $this->setIconUrl($attributes['icon_url']);
+        }
+
+        if (isset($attributes['proxy_icon_url'])) {
+            $this->setProxyIconUrl($attributes['proxy_icon_url']);
         }
     }
 

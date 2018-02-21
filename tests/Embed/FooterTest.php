@@ -18,18 +18,6 @@ class FooterTest extends TestCase
     }
 
     /** @test */
-    public function canBeConstructedWithParams()
-    {
-        $text = uniqid();
-        $iconUrl = uniqid();
-
-        $footer = new Footer($text, $iconUrl);
-
-        $this->assertEquals($text, $footer->text());
-        $this->assertEquals($iconUrl, $footer->iconUrl());
-    }
-
-    /** @test */
     public function canProvideUrl()
     {
         $this->footer->setIconUrl($iconUrl = uniqid());
@@ -49,5 +37,22 @@ class FooterTest extends TestCase
 
         $this->assertArrayHasKey('proxy_icon_url', $this->footer->jsonSerialize());
         $this->assertEquals($proxyIconUrl, $this->footer->jsonSerialize()['proxy_icon_url']);
+    }
+
+    /** @test */
+    public function convertsToAndFromArray()
+    {
+        $footer = new Footer();
+        $footer->setText($text = uniqid());
+        $footer->setIconUrl($iconUrl = uniqid());
+        $footer->setProxyIconUrl($proxyIconUrl = uniqid());
+
+        $jsonSerialized = $footer->jsonSerialize();
+
+        $newFooter = new Footer($jsonSerialized);
+
+        $this->assertEquals($footer->text(), $newFooter->text());
+        $this->assertEquals($footer->iconUrl(), $newFooter->iconUrl());
+        $this->assertEquals($footer->proxyIconUrl(), $newFooter->proxyIconUrl());
     }
 }

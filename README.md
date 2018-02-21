@@ -12,71 +12,75 @@ composer require more-cores/discord-message-builder:^2.0
 
 
 ```php
-$message = new Message();
+$message = new WebhookMessage();
 $message->setContent($content);
-$message->setTitle($title);
-$message->setDescription($description);
-$message->setUrl($url);
-$message->setTimestamp($dateTime);
-$message->setColor($color);
-$message->toJson(); // valid json ready to be sent to Discord
+
+$embed = new Embed();
+$embed->setTitle($title);
+$embed->setDescription($description);
+$embed->setUrl($url);
+$embed->setTimestamp($dateTime);
+$embed->setColor($color);
+$message->addEmbed($embed);
+
+$message->toJson(); // valid json ready to be sent to Discord via a Webhook
 ```
 
 ## Author
 
 ```php
 // define an embed author using shorthand
-$message->setAuthor($name);
+$embed->setAuthor($name);
 
 // and optionally specify specific attributes
-$message->setAuthor($name, $url);
+$embed->setAuthor($name, $url);
 
 // define an embed author by object
 $author = new Author();
 $author->setName($name);
-$message->setAuthor($author);
+$embed->setAuthor($author);
 ```
 
 ## Fields
 
 ```php
 // define an embed video using shorthand
-$message->addField($fieldName, $fieldValue);
+$embed->addField($fieldName, $fieldValue);
 
 // and optionally specify whether it's inline (default to false)
-$message->addField($fieldName, $fieldValue, $inline = true);
+$embed->addField($fieldName, $fieldValue, $inline = true);
 
 // define an embed field by object
 $field = new Field();
 $field->setName($name);
 $field->setValue($value);
-$message->setVideo($field);
+$embed->setVideo($field);
 ```
 
 ## Image
 
 ```php
-$message->setImageUrl($imageUrl);
+$embed->setImageUrl($imageUrl);
 ```
 
 ## Thumbnail
 
 ```php
-$message->setThumbnailUrl($thumbnailUrl);
+$embed->setThumbnailUrl($thumbnailUrl);
 ```
 
 ## Footer
 
 ```php
 // define an embed footer using shorthand
-$message->setFooter($text, $iconUrl);
+$embed->setFooter($text, $iconUrl);
 
 // and optionally specify  specific attributes
-$message->setFooter($urlToImage, $width, $height);
+$embed->setFooter($urlToImage, $width, $height);
 
 // define an embed thumbnail by object
 $thumbnail = new Thumbnail();
 $thumbnail->setText($text);
 $thumbnail->setUrl($urlToImage);
-$message->setFooter($thumbnail);
+$embed->setFooter($thumbnail);
 ```

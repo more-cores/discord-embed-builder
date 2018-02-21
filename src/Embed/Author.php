@@ -18,18 +18,22 @@ class Author extends Jsonable
     /** @var string */
     protected $proxyIconUrl;
 
-    public function __construct(string $name = null, string $url = null, string $iconUrl = null)
+    public function __construct(array $attributes = null)
     {
-        if ($name != null) {
-            $this->setName($name);
+        if (isset($attributes['name'])) {
+            $this->setName($attributes['name']);
         }
 
-        if ($url != null) {
-            $this->setUrl($url);
+        if (isset($attributes['url'])) {
+            $this->setUrl($attributes['url']);
         }
 
-        if ($iconUrl != null) {
-            $this->setIconUrl($iconUrl);
+        if (isset($attributes['icon_url'])) {
+            $this->setIconUrl($attributes['icon_url']);
+        }
+
+        if (isset($attributes['proxy_icon_url'])) {
+            $this->setProxyIconUrl($attributes['proxy_icon_url']);
         }
     }
 
