@@ -2,9 +2,7 @@
 
 namespace DiscordMessageBuilder;
 
-use DiscordMessageBuilder\Embed\Author;
 use DiscordMessageBuilder\Embed\Embed;
-use DiscordMessageBuilder\Embed\Field;
 use PHPUnit\Framework\TestCase;
 
 class WebhookMessageTest extends TestCase
@@ -37,14 +35,14 @@ class WebhookMessageTest extends TestCase
         $this->assertCount(0, $this->message->embeds());
 
         $firstEmbed = new Embed([
-            'title' => $firstEmbedName = uniqid()
+            'title' => $firstEmbedName = uniqid(),
         ]);
         $this->message->addEmbed($firstEmbed);
 
         $this->assertCount(1, $this->message->embeds());
 
         $secondEmbed = new Embed([
-            'title' => $secondEmbedName = uniqid()
+            'title' => $secondEmbedName = uniqid(),
         ]);
         $this->message->addEmbed($secondEmbed);
 

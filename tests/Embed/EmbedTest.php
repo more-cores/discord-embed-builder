@@ -84,7 +84,7 @@ class EmbedTest extends TestCase
     public function canSetAuthorObject()
     {
         $author = new Author([
-            'name' => $name = uniqid()
+            'name' => $name = uniqid(),
         ]);
         $this->embed->setAuthor($author);
 
@@ -198,15 +198,15 @@ class EmbedTest extends TestCase
         $embed->setTimestamp($timestamp = new DateTime('5 days ago'));
         $embed->setColor($color = uniqid());
         $embed->setFooter($footer = new Footer([
-            'text' => $footerText = uniqid()
+            'text' => $footerText = uniqid(),
         ]));
         $embed->setImageUrl($imageUrl = uniqid());
         $embed->setThumbnailUrl($thumbnailUrl = uniqid());
         $embed->setAuthor($author = new Author([
-            'name' => $authorName = uniqid()
+            'name' => $authorName = uniqid(),
         ]));
         $embed->addField($field = new Field([
-            'name' => $fieldName = uniqid()
+            'name' => $fieldName = uniqid(),
         ]));
 
         $jsonSerialized = $embed->jsonSerialize();
