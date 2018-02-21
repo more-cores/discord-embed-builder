@@ -15,17 +15,17 @@ class Field extends Jsonable
     /** @var bool */
     protected $inline = false;
 
-    public function __construct(string $name = null, string $value = null, bool $inline = null)
+    public function __construct(array $attributes = null)
     {
-        if ($name != null) {
-            $this->setName($name);
+        if (isset($attributes['name'])) {
+            $this->setName($attributes['name']);
         }
 
-        if ($value != null) {
-            $this->setValue($value);
+        if (isset($attributes['value'])) {
+            $this->setValue($attributes['value']);
         }
 
-        if ($inline === true) {
+        if (isset($attributes['inline']) && $attributes['inline'] == true) {
             $this->inline();
         }
     }

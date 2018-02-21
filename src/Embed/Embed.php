@@ -1,47 +1,102 @@
 <?php
 
-namespace DiscordMessageBuilder;
+namespace DiscordMessageBuilder\Embed;
 
 use DateTime;
-use DiscordMessageBuilder\Embed\Author;
-use DiscordMessageBuilder\Embed\Field;
-use DiscordMessageBuilder\Embed\Footer;
-use DiscordMessageBuilder\Embed\Image;
+use DiscordMessageBuilder\Jsonable;
 
-class Message extends Jsonable
+class Embed extends Jsonable
 {
     /** @var string */
-    protected $content = '';
+    private $title;
 
     /** @var string */
-    protected $title;
+    private $description;
 
     /** @var string */
-    protected $description;
-
-    /** @var string */
-    protected $url;
+    private $url;
 
     /** @var DateTime */
-    protected $timestamp;
+    private $timestamp;
 
     /** @var string */
-    protected $color;
-
-    /** @var Author */
-    protected $author;
-
-    /** @var Field[] */
-    protected $fields = [];
-
-    /** @var string */
-    protected $thumbnailUrl;
-
-    /** @var string */
-    protected $imageUrl;
+    private $color;
 
     /** @var Footer */
-    protected $footer;
+    private $footer;
+
+    /** @var string */
+    private $imageUrl;
+
+    /** @var string */
+    private $thumbnailUrl;
+
+    /** @var Author */
+    private $author;
+
+    /** @var Field[] */
+    private $fields = [];
+
+    public function __construct(array $attributes = null)
+    {
+        if (isset($attributes['title'])) {
+            $this->setTitle($attributes['title']);
+        }
+
+        if (isset($attributes['description'])) {
+            $this->setDescription($attributes['description']);
+        }
+
+        if (isset($attributes['url'])) {
+            $this->setUrl($attributes['url']);
+        }
+
+        if (isset($attributes['timestamp'])) {
+            if ($attributes['timestamp'] instanceof DateTime) {
+                $this->setTimestamp($attributes['timestamp']);
+            } else {
+                $this->setTimestamp(new DateTime($attributes['timestamp']));
+            }
+        }
+
+        if (isset($attributes['color'])) {
+            $this->setColor($attributes['color']);
+        }
+
+        if (isset($attributes['footer'])) {
+            if ($attributes['footer'] instanceof Footer) {
+                $this->setFooter($attributes['footer']);
+            } else {
+                $this->setFooter(new Footer($attributes['footer']));
+            }
+        }
+
+        if (isset($attributes['image']['url'])) {
+            $this->imageUrl = $attributes['image']['url'];
+        }
+
+        if (isset($attributes['thumbnail']['url'])) {
+            $this->thumbnailUrl = $attributes['thumbnail']['url'];
+        }
+
+        if (isset($attributes['author'])) {
+            if ($attributes['author'] instanceof Author) {
+                $this->setAuthor($attributes['author']);
+            } else {
+                $this->setAuthor(new Author($attributes['author']));
+            }
+        }
+
+        if (isset($attributes['fields'])) {
+            foreach ($attributes['fields'] as $field) {
+                if ($field instanceof Field) {
+                    $this->addField($field);
+                } else {
+                    $this->addField(new Field($field));
+                }
+            }
+        }
+    }
 
     public function setTitle(string $title)
     {
@@ -51,16 +106,6 @@ class Message extends Jsonable
     public function title() : string
     {
         return $this->title;
-    }
-
-    public function setContent(string $content)
-    {
-        $this->content = $content;
-    }
-
-    public function content() : string
-    {
-        return $this->content;
     }
 
     public function setDescription(string $description)
@@ -98,10 +143,7 @@ class Message extends Jsonable
         $this->color = ($red << 16) + ($green << 8) + $blue;
     }
 
-    /**
-     * Set the 24-bit RGB value of a color.
-     */
-    public function setColor(int $color)
+    public function setColor(string $color)
     {
         $this->color = $color;
     }
@@ -116,7 +158,18 @@ class Message extends Jsonable
         if ($author instanceof Author) {
             $this->author = $author;
         } else {
-            $this->author = new Author($author, $url, $iconUrl);
+            $authorObject = new Author();
+            $authorObject->setName($author);
+
+            if ($url != null) {
+                $authorObject->setUrl($url);
+            }
+
+            if ($iconUrl != null) {
+                $authorObject->setIconUrl($iconUrl);
+            }
+
+            $this->author = $authorObject;
         }
     }
 
@@ -130,7 +183,18 @@ class Message extends Jsonable
         if ($field instanceof Field) {
             $this->fields[] = $field;
         } else {
-            $this->fields[] = new Field($field, $value, $inline);
+            $fieldObject = new Field();
+            $fieldObject->setName($field);
+
+            if ($value != null) {
+                $fieldObject->setValue($value);
+            }
+
+            if ($inline != null && $inline === true) {
+                $fieldObject->inline();
+            }
+
+            $this->fields[] = $fieldObject;
         }
     }
 
@@ -164,7 +228,14 @@ class Message extends Jsonable
         if ($text instanceof Footer) {
             $this->footer = $text;
         } else {
-            $this->footer = new Footer($text, $iconUrl);
+            $footerObject = new Footer();
+            $footerObject->setText($text);
+
+            if ($iconUrl != null) {
+                $footerObject->setIconUrl($iconUrl);
+            }
+
+            $this->footer = $footerObject;
         }
     }
 
@@ -225,14 +296,6 @@ class Message extends Jsonable
             $embed['footer'] = $this->footer()->jsonSerialize();
         }
 
-        $jsonData = [
-            'content' => $this->content(),
-        ];
-
-        if (count($embed) > 0) {
-            $jsonData['embed'] = $embed;
-        }
-
-        return $jsonData;
+        return $embed;
     }
 }

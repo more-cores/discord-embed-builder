@@ -18,20 +18,6 @@ class AuthorTest extends TestCase
     }
 
     /** @test */
-    public function canBeConstructedWithParams()
-    {
-        $name = uniqid();
-        $url = uniqid();
-        $iconUrl = uniqid();
-
-        $author = new Author($name, $url, $iconUrl);
-
-        $this->assertEquals($name, $author->name());
-        $this->assertEquals($url, $author->url());
-        $this->assertEquals($iconUrl, $author->iconUrl());
-    }
-
-    /** @test */
     public function canProvideName()
     {
         $this->assertEquals('', $this->author->name());
@@ -75,5 +61,24 @@ class AuthorTest extends TestCase
 
         $this->assertArrayHasKey('proxy_icon_url', $this->author->jsonSerialize());
         $this->assertEquals($proxyIconUrl, $this->author->jsonSerialize()['proxy_icon_url']);
+    }
+
+    /** @test */
+    public function convertsToAndFromArray()
+    {
+        $author = new Author();
+        $author->setName($name = uniqid());
+        $author->setUrl($url = uniqid());
+        $author->setIconUrl($iconUrl = uniqid());
+        $author->setProxyIconUrl($proxyIconUrl = uniqid());
+
+        $jsonSerialized = $author->jsonSerialize();
+
+        $newAuthor = new Author($jsonSerialized);
+
+        $this->assertEquals($author->name(), $newAuthor->name());
+        $this->assertEquals($author->url(), $newAuthor->url());
+        $this->assertEquals($author->iconUrl(), $newAuthor->iconUrl());
+        $this->assertEquals($author->proxyIconUrl(), $newAuthor->proxyIconUrl());
     }
 }

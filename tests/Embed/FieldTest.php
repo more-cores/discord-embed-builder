@@ -18,18 +18,6 @@ class FieldTest extends TestCase
     }
 
     /** @test */
-    public function canBeConstructedWithParams()
-    {
-        $name = uniqid();
-        $value = uniqid();
-
-        $field = new Field($name, $value);
-
-        $this->assertEquals($name, $field->name());
-        $this->assertEquals($value, $field->value());
-    }
-
-    /** @test */
     public function canProvideName()
     {
         $this->assertEquals('', $this->field->name());
@@ -64,5 +52,22 @@ class FieldTest extends TestCase
 
         $this->assertArrayHasKey('inline', $this->field->jsonSerialize());
         $this->assertTrue($this->field->jsonSerialize()['inline']);
+    }
+
+    /** @test */
+    public function convertsToAndFromArray()
+    {
+        $field = new Field();
+        $field->setName($name = uniqid());
+        $field->setValue($value = uniqid());
+        $field->inline();
+
+        $jsonSerialized = $field->jsonSerialize();
+
+        $newField = new Field($jsonSerialized);
+
+        $this->assertEquals($field->name(), $newField->name());
+        $this->assertEquals($field->value(), $newField->value());
+        $this->assertTrue($newField->isInline());
     }
 }
