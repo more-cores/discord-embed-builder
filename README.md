@@ -10,6 +10,7 @@ composer require more-cores/discord-message-builder:^3.0
 
 # Usage
 
+Using webhooks (they have higher rate limits):
 
 ```php
 $message = new WebhookMessage();
@@ -24,6 +25,15 @@ $embed->setColor($color);
 $message->addEmbed($embed);
 
 $message->toJson(); // valid json ready to be sent to Discord via a Webhook
+```
+
+Or using standard messaging:
+
+```php
+$message = new Message();
+$message->setContent($content);
+$message->setEmbed($embed);
+
 ```
 
 ## Author
