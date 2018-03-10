@@ -44,6 +44,11 @@ class WebhookMessage extends Jsonable
         $this->embeds[] = $embed;
     }
 
+    public function setEmbeds(array $embeds)
+    {
+        $this->embeds[] = $embeds;
+    }
+
     public function embeds() : array
     {
         return $this->embeds;

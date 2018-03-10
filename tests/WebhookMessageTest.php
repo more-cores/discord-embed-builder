@@ -52,4 +52,16 @@ class WebhookMessageTest extends TestCase
         $this->assertEquals($firstEmbedName, $this->message->jsonSerialize()['embeds'][0]['title']);
         $this->assertEquals($secondEmbedName, $this->message->jsonSerialize()['embeds'][1]['title']);
     }
+
+    /** @test */
+    public function canSetEmbeds()
+    {
+        $this->assertCount(0, $this->message->embeds());
+
+        $this->message->setEmbeds([
+            new Embed(),
+        ]);
+
+        $this->assertCount(1, $this->message->embeds());
+    }
 }
