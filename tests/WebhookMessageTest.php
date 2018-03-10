@@ -15,14 +15,15 @@ class WebhookMessageTest extends TestCase
         parent::setUp();
 
         $this->message = new WebhookMessage();
-        $this->message->setContent('');
     }
 
     /** @test */
     public function canProvideContent()
     {
+        $this->assertFalse($this->message->hasContent());
         $this->message->setContent($content = uniqid());
 
+        $this->assertTrue($this->message->hasContent());
         $this->assertEquals($content, $this->message->content());
 
         $this->assertArrayHasKey('content', $this->message->jsonSerialize());
@@ -56,12 +57,14 @@ class WebhookMessageTest extends TestCase
     /** @test */
     public function canSetEmbeds()
     {
+        $this->assertFalse($this->message->hasEmbeds());
         $this->assertCount(0, $this->message->embeds());
 
         $this->message->setEmbeds([
             new Embed(),
         ]);
 
+        $this->assertTrue($this->message->hasEmbeds());
         $this->assertCount(1, $this->message->embeds());
     }
 }

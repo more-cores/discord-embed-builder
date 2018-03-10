@@ -7,10 +7,10 @@ use DiscordMessageBuilder\Embed\Embed;
 class WebhookMessage extends Jsonable
 {
     /** @var string */
-    protected $content = '';
+    protected $content;
 
     /** @var Embed[] */
-    protected $embeds = [];
+    protected $embeds;
 
     public function __construct(array $attributes = null)
     {
@@ -36,7 +36,12 @@ class WebhookMessage extends Jsonable
 
     public function content() : string
     {
-        return $this->content;
+        return (string) $this->content;
+    }
+
+    public function hasContent() : bool
+    {
+        return $this->content != null;
     }
 
     public function addEmbed(Embed $embed)
@@ -51,7 +56,12 @@ class WebhookMessage extends Jsonable
 
     public function embeds() : array
     {
-        return $this->embeds;
+        return (array) $this->embeds;
+    }
+
+    public function hasEmbeds() : bool
+    {
+        return $this->embeds != null;
     }
 
     public function jsonSerialize()
@@ -60,7 +70,7 @@ class WebhookMessage extends Jsonable
             'content' => $this->content(),
         ];
 
-        if (count($this->embeds) > 0) {
+        if ($this->embeds != null && count($this->embeds) > 0) {
             $jsonData['embeds'] = [];
 
             foreach ($this->embeds as $embed) {
