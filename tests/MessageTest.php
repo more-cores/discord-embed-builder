@@ -15,14 +15,15 @@ class MessageTest extends TestCase
         parent::setUp();
 
         $this->message = new Message();
-        $this->message->setContent('');
     }
 
     /** @test */
     public function canProvideContent()
     {
+        $this->assertFalse($this->message->hasContent());
         $this->message->setContent($content = uniqid());
 
+        $this->assertTrue($this->message->hasContent());
         $this->assertEquals($content, $this->message->content());
 
         $this->assertArrayHasKey('content', $this->message->jsonSerialize());
@@ -32,11 +33,13 @@ class MessageTest extends TestCase
     /** @test */
     public function canAddMultipleEmbeds()
     {
+        $this->assertFalse($this->message->hasEmbed());
         $firstEmbed = new Embed([
             'title' => $firstEmbedName = uniqid(),
         ]);
         $this->message->setEmbed($firstEmbed);
 
+        $this->assertTrue($this->message->hasEmbed());
         $this->assertArrayHasKey('embed', $this->message->jsonSerialize());
         $this->assertEquals($firstEmbedName, $this->message->jsonSerialize()['embed']['title']);
     }

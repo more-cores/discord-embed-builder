@@ -7,7 +7,7 @@ use DiscordMessageBuilder\Embed\Embed;
 class Message extends Jsonable
 {
     /** @var string */
-    private $content = '';
+    private $content;
 
     /** @var Embed */
     private $embed;
@@ -34,7 +34,12 @@ class Message extends Jsonable
 
     public function content() : string
     {
-        return $this->content;
+        return (string) $this->content;
+    }
+
+    public function hasContent() : bool
+    {
+        return $this->content != null;
     }
 
     public function setEmbed(Embed $embed)
@@ -45,6 +50,11 @@ class Message extends Jsonable
     public function embed() : Embed
     {
         return $this->embed;
+    }
+
+    public function hasEmbed() : bool
+    {
+        return $this->embed != null;
     }
 
     public function jsonSerialize()
