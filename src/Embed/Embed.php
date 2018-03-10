@@ -8,34 +8,34 @@ use DiscordMessageBuilder\Jsonable;
 class Embed extends Jsonable
 {
     /** @var string */
-    private $title;
+    protected $title;
 
     /** @var string */
-    private $description;
+    protected $description;
 
     /** @var string */
-    private $url;
+    protected $url;
 
     /** @var DateTime */
-    private $timestamp;
+    protected $timestamp;
 
     /** @var string */
-    private $color;
+    protected $color;
 
     /** @var Footer */
-    private $footer;
+    protected $footer;
 
     /** @var string */
-    private $imageUrl;
+    protected $imageUrl;
 
     /** @var string */
-    private $thumbnailUrl;
+    protected $thumbnailUrl;
 
     /** @var Author */
-    private $author;
+    protected $author;
 
     /** @var Field[] */
-    private $fields = [];
+    protected $fields = [];
 
     public function __construct(array $attributes = null)
     {
@@ -108,6 +108,11 @@ class Embed extends Jsonable
         return $this->title;
     }
 
+    public function hasTitle() : bool
+    {
+        return $this->title != null;
+    }
+
     public function setDescription(string $description)
     {
         $this->description = $description;
@@ -116,6 +121,11 @@ class Embed extends Jsonable
     public function description() : string
     {
         return $this->description;
+    }
+
+    public function hasDescription() : bool
+    {
+        return $this->description != null;
     }
 
     public function setUrl(string $url)
@@ -128,6 +138,11 @@ class Embed extends Jsonable
         return $this->url;
     }
 
+    public function hasUrl() : bool
+    {
+        return $this->url != null;
+    }
+
     public function setTimestamp(DateTime $timestamp)
     {
         $this->timestamp = $timestamp;
@@ -136,6 +151,11 @@ class Embed extends Jsonable
     public function timestamp() : DateTime
     {
         return $this->timestamp;
+    }
+
+    public function hasTimestamp() : bool
+    {
+        return $this->timestamp != null;
     }
 
     public function setColorRGB(int $red, int $green, int $blue)
@@ -151,6 +171,11 @@ class Embed extends Jsonable
     public function color() : string
     {
         return $this->color;
+    }
+
+    public function hasColor() : bool
+    {
+        return $this->color != null;
     }
 
     public function setAuthor($author, string $url = null, string $iconUrl = null)
@@ -178,6 +203,11 @@ class Embed extends Jsonable
         return $this->author;
     }
 
+    public function hasAuthor() : bool
+    {
+        return $this->author != null;
+    }
+
     public function addField($field, string $value = null, bool $inline = null)
     {
         if ($field instanceof Field) {
@@ -203,6 +233,11 @@ class Embed extends Jsonable
         return $this->fields;
     }
 
+    public function hasFields() : bool
+    {
+        return count($this->fields) > 0;
+    }
+
     public function setImageUrl(string $imageUrl)
     {
         $this->imageUrl = $imageUrl;
@@ -213,6 +248,11 @@ class Embed extends Jsonable
         return $this->imageUrl;
     }
 
+    public function hasImage() : bool
+    {
+        return $this->imageUrl != null;
+    }
+
     public function setThumbnailUrl(string $thumbnailUrl)
     {
         $this->thumbnailUrl = $thumbnailUrl;
@@ -221,6 +261,11 @@ class Embed extends Jsonable
     public function thumbnailUrl() : string
     {
         return $this->thumbnailUrl;
+    }
+
+    public function hasThumbnail() : bool
+    {
+        return $this->thumbnailUrl != null;
     }
 
     public function setFooter($text, string $iconUrl = null)
@@ -242,6 +287,11 @@ class Embed extends Jsonable
     public function footer() : Footer
     {
         return $this->footer;
+    }
+
+    public function hasFooter() : bool
+    {
+        return $this->footer != null;
     }
 
     public function jsonSerialize()

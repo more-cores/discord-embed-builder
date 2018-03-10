@@ -20,8 +20,10 @@ class EmbedTest extends TestCase
     /** @test */
     public function canProvideTitle()
     {
+        $this->assertFalse($this->embed->hasTitle());
         $this->embed->setTitle($title = uniqid());
 
+        $this->assertTrue($this->embed->hasTitle());
         $this->assertEquals($title, $this->embed->title());
 
         $this->assertArrayHasKey('title', $this->embed->jsonSerialize());
@@ -31,8 +33,10 @@ class EmbedTest extends TestCase
     /** @test */
     public function canProvideUrl()
     {
+        $this->assertFalse($this->embed->hasUrl());
         $this->embed->setUrl($url = uniqid());
 
+        $this->assertTrue($this->embed->hasUrl());
         $this->assertEquals($url, $this->embed->url());
 
         $this->assertArrayHasKey('url', $this->embed->jsonSerialize());
@@ -42,8 +46,10 @@ class EmbedTest extends TestCase
     /** @test */
     public function canProvideTimestamp()
     {
+        $this->assertFalse($this->embed->hasTimestamp());
         $this->embed->setTimestamp($timestamp = new DateTime());
 
+        $this->assertTrue($this->embed->hasTimestamp());
         $this->assertEquals($timestamp, $this->embed->timestamp());
 
         $this->assertArrayHasKey('timestamp', $this->embed->jsonSerialize());
@@ -64,10 +70,12 @@ class EmbedTest extends TestCase
     /** @test */
     public function canProvideColor()
     {
+        $this->assertFalse($this->embed->hasColor());
         $this->embed->setColor($color = time());
 
         $this->assertEquals($color, $this->embed->color());
 
+        $this->assertTrue($this->embed->hasColor());
         $this->assertArrayHasKey('color', $this->embed->jsonSerialize());
         $this->assertEquals($color, $this->embed->jsonSerialize()['color']);
     }
@@ -100,8 +108,10 @@ class EmbedTest extends TestCase
         $name = uniqid();
         $url = uniqid();
         $iconUrl = uniqid();
+        $this->assertFalse($this->embed->hasAuthor());
         $this->embed->setAuthor($name, $url, $iconUrl);
 
+        $this->assertTrue($this->embed->hasAuthor());
         $this->assertEquals($name, $this->embed->author()->name());
         $this->assertEquals($url, $this->embed->author()->url());
         $this->assertEquals($iconUrl, $this->embed->author()->iconUrl());
@@ -110,12 +120,14 @@ class EmbedTest extends TestCase
     /** @test */
     public function canAddMultipleFields()
     {
+        $this->assertFalse($this->embed->hasFields());
         $this->assertCount(0, $this->embed->fields());
 
         $firstField = new Field();
         $firstField->setName($firstName = uniqid());
         $this->embed->addField($firstField);
 
+        $this->assertTrue($this->embed->hasFields());
         $this->assertCount(1, $this->embed->fields());
 
         $secondField = new Field();
@@ -145,8 +157,10 @@ class EmbedTest extends TestCase
     /** @test */
     public function canSetImageUrl()
     {
+        $this->assertFalse($this->embed->hasImage());
         $this->embed->setImageUrl($imageUrl = uniqid());
 
+        $this->assertTrue($this->embed->hasImage());
         $this->assertEquals($imageUrl, $this->embed->imageUrl());
 
         $this->assertArrayHasKey('image', $this->embed->jsonSerialize());
@@ -156,8 +170,10 @@ class EmbedTest extends TestCase
     /** @test */
     public function canSetThumbnailUrl()
     {
+        $this->assertFalse($this->embed->hasThumbnail());
         $this->embed->setThumbnailUrl($imageUrl = uniqid());
 
+        $this->assertTrue($this->embed->hasThumbnail());
         $this->assertEquals($imageUrl, $this->embed->thumbnailUrl());
 
         $this->assertArrayHasKey('thumbnail', $this->embed->jsonSerialize());
@@ -169,8 +185,10 @@ class EmbedTest extends TestCase
     {
         $footer = new Footer();
         $footer->setText($text = uniqid());
+        $this->assertFalse($this->embed->hasFooter());
         $this->embed->setFooter($footer);
 
+        $this->assertTrue($this->embed->hasFooter());
         $this->assertEquals($footer, $this->embed->footer());
 
         $this->assertArrayHasKey('footer', $this->embed->jsonSerialize());
