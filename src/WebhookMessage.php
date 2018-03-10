@@ -7,10 +7,10 @@ use DiscordMessageBuilder\Embed\Embed;
 class WebhookMessage extends Jsonable
 {
     /** @var string */
-    private $content = '';
+    protected $content = '';
 
     /** @var Embed[] */
-    private $embeds = [];
+    protected $embeds = [];
 
     public function __construct(array $attributes = null)
     {
