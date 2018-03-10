@@ -59,7 +59,7 @@ class WebhookMessageTest extends TestCase
         $this->assertCount(0, $this->message->embeds());
 
         $this->message->setEmbeds([
-            new Embed()
+            new Embed(),
         ]);
 
         $this->assertCount(1, $this->message->embeds());
